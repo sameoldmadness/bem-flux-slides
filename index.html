@@ -1,0 +1,636 @@
+<!doctype html>
+
+<link rel="stylesheet" href="../../css/reveal.css">
+<link rel="stylesheet" href="css/theme/black.css" id="theme">
+<link rel="stylesheet" href="lib/css/zenburn.css">
+
+<div class="reveal">
+<div class="slides">
+
+<section>
+    <style>
+        #author {
+            font-size: .8em;
+            line-height: 1;
+            margin-top: 5em;
+        }
+        #author-desc {
+            font-size: .7em;
+            line-height: 1;
+        }
+
+        .reveal pre.shaded code {
+            color: #777;
+        }
+
+        .shaded .hljs-keyword,
+        .shaded .hljs-tag,
+        .shaded .css .hljs-class,
+        .shaded .css .hljs-id,
+        .shaded .lisp .hljs-title,
+        .shaded .nginx .hljs-title,
+        .shaded .hljs-request,
+        .shaded .hljs-status,
+        .shaded .clojure .hljs-attribute {
+            color: #777;
+        }
+        .shaded .dos .hljs-keyword,
+        .shaded .python .hljs-decorator,
+        .shaded .hljs-title,
+        .shaded .haskell .hljs-type,
+        .shaded .diff .hljs-header,
+        .shaded .ruby .hljs-class .hljs-parent,
+        .shaded .apache .hljs-tag,
+        .shaded .nginx .hljs-built_in,
+        .shaded .tex .hljs-command,
+        .shaded .hljs-prompt {
+            color: #777;
+        }
+        .shaded .diff .hljs-deletion,
+        .shaded .hljs-string,
+        .shaded .hljs-tag .hljs-value,
+        .shaded .hljs-preprocessor,
+        .shaded .hljs-pragma,
+        .shaded .hljs-built_in,
+        .shaded .sql .hljs-aggregate,
+        .shaded .hljs-javadoc,
+        .shaded .smalltalk .hljs-class,
+        .shaded .smalltalk .hljs-localvars,
+        .shaded .smalltalk .hljs-array,
+        .shaded .css .hljs-rules .hljs-value,
+        .shaded .hljs-attr_selector,
+        .shaded .hljs-pseudo,
+        .shaded .apache .hljs-cbracket,
+        .shaded .tex .hljs-formula,
+        .shaded .coffeescript .hljs-attribute {
+            color: #777;
+        }
+
+        .shaded .hljs-tag:nth-child(1) .hljs-value:nth-child(3) {
+            color: #CC9393;
+        }
+    </style>
+    <h1>БЭМ + Flux</h1>
+    <p>EkbJS 2. 2015-09-04</p>
+    <p id="author">Роман Парадеев</p>
+    <p id="author-desc">разработчик, <span style="color: red">Я</span>ндекс</p>
+</section>
+
+<section>
+    <section data-background="#ffdb4d" data-transition="default-in none-out">
+        <h2>БЭМ</h2>
+        <p>&nbsp;</p>
+    </section>
+
+    <section data-transition="none-in default-out">
+        <h2>БЭМ</h2>
+        <p>как методология</p>
+    </section>
+
+    <section data-background="white" data-transition="default-in none-out">
+        <p>&nbsp;</p>
+        <img src="assets/bem_1.png">
+    </section>
+
+    <section data-background="white" data-transition="none">
+        <p>Блок — независимый компонент страницы</p>
+        <img src="assets/bem_2.png">
+    </section>
+
+    <section data-background="white" data-transition="none">
+        <p>Элемент — составная часть блока</p>
+        <img src="assets/bem_3_1.png">
+    </section>
+
+    <section data-background="white" data-transition="none">
+        <p>Элемент — составная часть блока</p>
+        <img src="assets/bem_3_2.png">
+    </section>
+
+    <section data-background="white" data-transition="none">
+        <p>Элемент — составная часть блока</p>
+        <img src="assets/bem_3_3.png">
+    </section>
+
+    <section data-background="white" data-transition="none">
+        <p>Модификатор задаёт особые свойства</p>
+        <img src="assets/bem_4.png">
+    </section>
+
+    <section data-background="assets/fabulous.gif"></section>
+
+    <section data-transition="default-in none-out">
+        <!-- <blockquote style="visibility: hidden">&nbsp;<br>&nbsp;</blockquote> -->
+        <pre><code class="html" data-trim>
+<button class="button button_theme_action button_size_m wizard-phone2__action wizard-phone2__action_type_confirm-phone i-bem button_js_inited" type="button" role="button" onclick="return {&amp;quot;button&amp;quot;:{}}"><span class="button__text">Подтвердить</span></button>
+        </code></pre>
+    </section>
+
+    <!-- <section data-transition="none-in default-out">
+        
+        <blockquote>Тут даже инлайн стиль короче будет написать, чем такую лапшу в коде держать!</blockquote>
+        <pre class="shaded"><code class="html" data-trim>
+<button class="button button_theme_action button_size_m wizard-phone2__action wizard-phone2__action_type_confirm-phone i-bem button_js_inited" type="button" role="button" onclick="return {&amp;quot;button&amp;quot;:{}}"><span class="button__text">Подтвердить</span></button>
+        </code></pre>
+    </section> -->
+
+    <section>
+        <pre><code data-trim>
+bh.apply({
+    block: 'button',
+    mods: { theme: 'action', size: 'm' },
+    content: 'Подтвердить'
+})
+        </code></pre>
+    </section>
+
+    <section>
+        <style>
+            .reveal h4 {
+                margin-top: 20px;
+            }
+            ul.condensed {
+                list-style-type: none;
+            }
+            ul.condensed > li {
+                margin-bottom: .2em;
+            }
+        </style>
+        <!-- <h2>https://ru.bem.info</h2> -->
+        <ul class="condensed">
+            <li>github.com/bem/bem-tools</li>
+            <li>github.com/enb-make/enb</li>
+            <li>github.com/floatdrop/gulp-bem</li>
+            <li>bem.info/tools/templating-engines/bemxjst</li>
+            <li>github.com/bem/bh</li>
+            <li>github.com/bem/bem-core</li>
+            <li>github.com/bem-node/bem-node</li>
+            <li>github.com/baby-loris/baby-bem</li>
+        </ul>
+    </section>
+</section>
+
+<section>
+    <section data-transition="default-in none-out">
+        <h2>i-bem.js</h2>
+        <p>&nbsp;</p>
+    </section>
+
+    <section data-background="#bada55" data-transition="none-in default-out">
+        <h2>i-bem.js</h2>
+        <p>фреймворк для управления блоками</p>
+    </section>
+
+    <section>
+        <pre><code class="js" data-trim>
+button.setMod('pressed', 'yes')
+        </code></pre>
+
+        <pre class="fragment"><code class="js" data-trim>
+button.elem('text')
+        </code></pre>
+
+        <pre class="fragment"><code class="js" data-trim>
+button.on('change', fn)
+        </code></pre>
+
+        <pre class="fragment"><code class="js" data-trim>
+button.setText('Нажми меня!')
+        </code></pre>
+    </section>
+</section>
+
+<!-- <section>
+    <section>
+        <blockquote>А теперь соберём из блоков приложение!</blockquote>
+    </section>
+
+    <section data-background="white">
+        <img src="assets/draw_owl.jpg">
+    </section>
+
+    <section>
+        <p>Почему бы просто не взять любимый фреймворк?</p>
+    </section>
+
+    <section>
+        <img class="stretch" src="assets/mvc.png">
+    </section>
+
+    <section>
+        <style>
+            .mvc-mini {
+                width: 30%;
+            }
+        </style>
+        <img class="mvc-mini" src="assets/mvc.png">
+        <img class="mvc-mini" src="assets/mvc.png">
+        <img class="mvc-mini" src="assets/mvc.png">
+        <img class="mvc-mini" src="assets/mvc.png">
+        <img class="mvc-mini" src="assets/mvc.png">
+        <img class="mvc-mini" src="assets/mvc.png">
+        <img class="mvc-mini" src="assets/mvc.png">
+        <img class="mvc-mini" src="assets/mvc.png">
+        <img class="mvc-mini" src="assets/mvc.png">
+    </section>
+</section> -->
+
+<section>
+    <section data-background="assets/obama.jpg">
+        <!-- <h2>Собираем блоки в&nbsp;приложение</h2> -->
+    </section>
+
+    <section>
+        <pre><code data-trim class="js">
+button.findBlockOutside('form').submit();
+form.findBlockInside('button').on('click', cb);
+        </code></pre>
+
+        <div class="fragment">
+            <h4>vs</h4>
+            
+            <pre><code data-trim class="js">
+$button.parent('.form').submit();
+$form.find('.button').on('click', cb);
+            </code></pre>
+        </div>
+    </section>
+
+    <section>
+        <style>
+            pre.mini {
+                font-size: .5em;
+            }
+        </style>
+        <pre class="mini"><code data-trim class="js stretch">
+jQuery(function(a) {
+  return "undefined" == typeof wc_add_to_cart_params ? !1 : void a(document).on("click", ".add_to_cart_button", function() {
+    var b = a(this);
+    if (b.is(".product_type_simple")) {
+      if (!b.attr("data-product_id")) return !0;
+      b.removeClass("added"), b.addClass("loading");
+      var c = {
+        action: "woocommerce_add_to_cart"
+      };
+      return a.each(b.data(), function(a, b) {
+        c[a] = b
+      }), a("body").trigger("adding_to_cart", [b, c]), a.post(wc_add_to_cart_params.ajax_url, c, function(c) {
+        if (c) {
+          var d = window.location.toString();
+          return d = d.replace("add-to-cart", "added-to-cart"), c.error && c.product_url ? void(window.location = c.product_url) : "yes" === wc_add_to_cart_params.cart_redirect_after_add ? void(window.location = wc_add_to_cart_params.cart_url) : (b.removeClass("loading"), fragments = c.fragments, cart_hash = c.cart_hash, fragments && a.each(fragments, function(b) {
+            a(b).addClass("updating")
+          }), a(".shop_table.cart, .updating, .cart_totals").fadeTo("400", "0.6").block({
+            message: null,
+            overlayCSS: {
+              opacity: .6
+            }
+          }), b.addClass("added"), wc_add_to_cart_params.is_cart || 0 !== b.parent().find(".added_to_cart").size() || b.after(' <a href="' + wc_add_to_cart_params.cart_url + '" class="added_to_cart wc-forward" title="' + wc_add_to_cart_params.i18n_view_cart + '">' + wc_add_to_cart_params.i18n_view_cart + "</a>"), fragments && a.each(fragments, function(b, c) {
+            a(b).replaceWith(c)
+          }), a(".widget_shopping_cart, .updating").stop(!0).css("opacity", "1").unblock(), a(".shop_table.cart").load(d + " .shop_table.cart:eq(0) > *", function() {
+            a(".shop_table.cart").stop(!0).css("opacity", "1").unblock(), a("body").trigger("cart_page_refreshed")
+          }), a(".cart_totals").load(d + " .cart_totals:eq(0) > *", function() {
+            a(".cart_totals").stop(!0).css("opacity", "1").unblock()
+          }), a("body").trigger("added_to_cart", [fragments, cart_hash, b]), void 0)
+        }
+      }), !1
+    }
+    return !0
+  })
+});
+        </code></pre>
+    </section>
+
+    <section>
+        <style>
+            .verdict {
+                list-style-type: none !important; /* I mean it! */
+            }
+            .verdict__item_plus {
+                /*color: green;*/
+            }
+            .verdict__item_plus:before {
+                content: '+';
+            }
+            .verdict__item_minus {
+                /*color: red;*/
+            }
+            .verdict__item_minus:before {
+                content: '-';
+            }
+            .verdict__item:before {
+                position: relative;
+                left: -0.5em;
+            }
+            .verdict__item {
+                text-indent: -0.5em;
+            }
+        </style>
+        <h2>подход jQuery</h2>
+        <ul class="verdict">
+            <li class="fragment verdict__item verdict__item_plus">просто начать писать код</li>
+            <li class="fragment verdict__item verdict__item_minus">высокая связность блоков</li>
+        </ul>
+    </section>
+
+   <!--  <section>
+        <pre><code data-trim class="js">
+button.on('click', function () {
+  if (this.findBlockInside('form').isValid()) {
+    this.findBlockOutside('form').submit();
+  }
+  this.findBlockOutside('form')
+      .one('success', function () {
+        this.findBlockOutside('note').show();
+      }, this);
+});
+        </code></pre>
+    </section> -->
+
+    <section>
+        <pre><code data-trim>
+button.on('click', function () {
+    BEM.channel('form').trigger('submit');    
+})
+
+BEM.channel('form').on('submit', function () {
+    // реагируем на событие
+})
+        </code></pre>
+
+        <div class="fragment">
+            <h4>vs</h4>
+            
+            <pre><code data-trim class="js">
+$button.on('click', function () {
+    $('body').trigger('form.submit');    
+})
+
+$('body').on('form.submit', function () {
+    // реагируем на событие
+})
+            </code></pre>
+        </div>
+    </section>
+
+    <section data-background="assets/traffic.gif"></section>
+
+    <section>
+        <h2>подход Pub/Sub</h2>
+        <ul class="verdict">
+            <li class="fragment verdict__item verdict__item_plus">блоки остаются независимыми</li>
+            <li class="fragment verdict__item verdict__item_minus">сложно понять, что происходит</li>
+        </ul>
+    </section>
+</section>
+<section>
+    <section>
+        <p>Как сделать систему понятной,<br>не увеличивая связность блоков?</p>
+    </section>
+
+    <!-- <section>
+        <h2>Нужно больше дерева!</h2>
+        <ul>
+            <li class="fragment">i-bbglue (two-way binding)</li>
+            <li class="fragment">Backbone.js</li>
+            <li class="fragment">backbone-nested-models</li>
+            <li class="fragment">...</li>
+            <li class="fragment">profit?</li>
+        </ul>
+    </section>
+
+    <section data-background="assets/grumpy.jpg">
+    </section> -->
+
+    <section>
+        <img src="assets/deletecode.png">
+    </section>
+</section>
+<section>
+    <section>
+        <h2>i-bem.js</h2>
+        <p class="fragment">the good parts</p>
+    </section>
+
+    <section data-background="white" data-transition="default-in none-out">
+        <div>
+            <span class="fragment">form</span>
+            <span style="visibility:hidden;">→ phone</span>
+        </div>
+        <img src="assets/challenge_1_1.png" alt="">
+    </section>
+
+    <section data-background="white" data-transition="none-in default-out">
+        <div>
+            <span>form</span>
+            <span class="fragment">→ phone</span>
+        </div>
+        <img src="assets/challenge_1_2.png" alt="">
+    </section>
+
+    <section>
+        <h2>Ограничим видимость</h2>
+        <p>Блок не должен знать о том, что происходит снаружи.</p>
+    </section>
+
+    <section>
+        <h2>Поток данных</h2>
+        <div class="fragment">
+            <p>вниз — вызов API блока</p>
+            <pre><code class="js" data-trim>
+form.findBlockInside('phone').setVal('223-322')
+            </code></pre>
+        </div>
+        <div class="fragment">
+            <p>вверх — подписка на события</p>
+            <pre><code class="js" data-trim>
+form.findBlockInside('phone').on('change', fn);
+            </code></pre>
+        </div>
+    </section>
+
+    <section>
+        <h2>Результат</h2>
+        <ul>
+            <li class="fragment">родительский блок зависит от дочерних</li>
+            <li class="fragment">дочерние блоки не зависят от родительского</li>
+        </ul>
+    </section>
+
+    <section data-background="white" data-transition="default-in none-out">
+        <div>
+            <span class="fragment">form</span> 
+            <span style="visibility:hidden;">→ summary</span>  
+            <span style="visibility:hidden;">→ phone</span> 
+            <span style="visibility:hidden;">→ input</span> 
+        </div>
+        <img src="assets/challenge_2_1.png" alt="">
+    </section>
+
+    <section data-background="white" data-transition="none">
+        <div>
+            <span>form</span> 
+            <span>→ summary</span>  
+            <span style="visibility:hidden;">→ phone</span> 
+            <span style="visibility:hidden;">→ input</span> 
+        </div>
+        <img src="assets/challenge_2_2.png" alt="">
+    </section>
+
+    <section data-background="white" data-transition="none">
+        <div>
+            <span>form</span> 
+            <span>→ summary</span>  
+            <span>→ phone</span> 
+            <span style="visibility:hidden;">→ input</span> 
+        </div>
+        <img src="assets/challenge_2_3.png" alt="">
+    </section>
+
+    <section data-background="white" data-transition="none-in default-out">
+        <div>
+            <span>form</span> 
+            <span>→ summary</span>  
+            <span>→ phone</span> 
+            <span>→ input</span> 
+        </div>
+        <img src="assets/challenge_2_4.png" alt="">
+    </section>
+
+    <section>
+        <h2>Ограничим полномочия</h2>
+        <p>Не все блоки могут знать о других блоках</p>
+    </section>
+
+    <section data-transition="none-out">
+        <span>form</span> 
+        <span>→ summary</span>  
+        <span>→ phone</span> 
+        <span>→ input</span> 
+
+        <pre class="fragment"><code class="js" data-trim>
+form.findBlockInside('summary').calc();
+summary.findBlockInside('phone').submit();
+phone.findBlockInside('input').setVal('223-322');
+        </code></pre>
+
+        <pre style="visibility:hidden"><code class="js" data-trim>
+form.findBlockInside('summary').calc();
+form.findBlockInside('phone').submit();
+form.findBlockInside('input').setVal('223-322');
+        </code></pre>
+    </section>
+
+    <section data-transition="none-in">
+        <span>form</span> 
+        <span>→ summary</span>  
+        <span>→ phone</span> 
+        <span>→ input</span> 
+
+        <pre class="shaded"><code class="js" data-trim>
+form.findBlockInside('summary').calc();
+summary.findBlockInside('phone').submit();
+phone.findBlockInside('input').setVal('223-322');
+        </code></pre>
+
+        <pre><code class="js" data-trim>
+form.findBlockInside('summary').calc();
+form.findBlockInside('phone').submit();
+form.findBlockInside('input').setVal('223-322');
+        </code></pre>
+    </section>
+
+    <section>
+        <h2>Результат</h2>
+        <ul>
+            <li class="fragment">«умных» зависимых блоков — 3-5 на страницу</li>
+            <li class="fragment">большинство блоков — абсолютно независимые</li>
+        </ul>
+    </section>
+
+    <section data-background="white" data-transition="default-in none-out">
+        <img src="assets/challenge_3_1.png" alt="">
+    </section>
+
+    <section data-background="white" data-transition="none">
+        <img src="assets/challenge_3_2.png" alt="">
+    </section>
+
+    <section data-background="white" data-transition="none-in default-out">
+        <img src="assets/challenge_3_3.png" alt="">
+    </section>
+
+    <section>
+        <h2>Отделим данные</h2>
+        <p>Данные должны храниться в особых блоках</p>
+    </section>
+
+    <section>
+        <pre><code class="js" data-trim>
+userStorage.register(header);
+userStorage.register(form);
+
+userStorage.set('name', 'Роман Парадеев');
+userStorage.emitChange();
+        </code></pre>
+    </section>
+
+    <section>
+        <h2>Результат</h2>
+        <ul>
+            <li class="fragment">данные существуют в единственном экземпляре</li>
+            <li class="fragment">«умные» блоки работают с данными без посредников</li>
+        </ul>
+    </section>
+</section>
+
+<section>
+    <section>
+        <p>Ну что там,<br>когда уже про Flux?</p>
+    </section>
+
+    <section data-background="#318435">
+        <p>А это он и есть</p>
+    </section>
+
+    <section data-background="assets/turn.gif">
+    </section>
+
+    <section>
+        <h2>Flux</h2>
+        <ul>
+            <li class="fragment">view<span class="fragment"> — «глупый» блок</span></li>
+            <li class="fragment">storage<span class="fragment"> — блок с данными</span></li>
+            <li class="fragment">view controller<span class="fragment"> — «умный» блок</span></li>
+            <li class="fragment">action<span class="fragment"> — простой объект</span></li>
+            <li class="fragment">dispatcher<span class="fragment"> — ?</span></li>
+        </ul>
+    </section>
+
+    <section>
+        <h2>Диспетчер</h2>
+        <p>обеспечивает синхронную обработку хранилищем<br>запросов от «умных» блоков</p>
+    </section>
+
+    <section data-background="assets/adventures.jpg">
+    </section>
+</section>
+
+<section data-background="deeppink">
+    <h2>BEM ♥ FLUX</h2>
+</section>
+
+<section>
+    <h2>Спасибо за внимание : )</h2>
+    <ul>
+        <li><a href="https://github.com/sameoldmadness/bem-flux-demo">github.com/sameoldmadness/bem-flux-demo</a></li>
+        <li><a href="https://github.com/bem-incubator/bem-flux">github.com/bem-incubator/bem-flux</a></li>
+        <li><a href="https://twitter.com/sameoldmadness">@sameoldmadness</a></li>
+    </ul>
+</section>
+
+</div>
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="../../js/reveal.js"></script>
+<script src="../../js/init.js"></script>
