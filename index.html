@@ -82,11 +82,6 @@
         <p>&nbsp;</p>
     </section>
 
-    <section data-transition="none-in default-out">
-        <h2>БЭМ</h2>
-        <p>как методология</p>
-    </section>
-
     <section data-background="white" data-transition="default-in none-out">
         <p>&nbsp;</p>
         <img src="assets/bem_1.png">
@@ -566,11 +561,11 @@ form.findBlockInside('input').setVal('223-322');
 
     <section>
         <pre><code class="js" data-trim>
-userStorage.register(header);
-userStorage.register(form);
+userStore.register(header);
+userStore.register(form);
 
-userStorage.set('name', 'Роман Парадеев');
-userStorage.emitChange();
+userStore.set('name', 'Роман Парадеев');
+userStore.emitChange();
         </code></pre>
     </section>
 
@@ -599,7 +594,7 @@ userStorage.emitChange();
         <h2>Flux</h2>
         <ul>
             <li class="fragment">view<span class="fragment"> — «глупый» блок</span></li>
-            <li class="fragment">storage<span class="fragment"> — блок с данными</span></li>
+            <li class="fragment">store<span class="fragment"> — блок с данными</span></li>
             <li class="fragment">view controller<span class="fragment"> — «умный» блок</span></li>
             <li class="fragment">action<span class="fragment"> — простой объект</span></li>
             <li class="fragment">dispatcher<span class="fragment"> — ?</span></li>

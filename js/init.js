@@ -1,12 +1,12 @@
 Reveal.initialize({
     // Display controls in the bottom right corner
-    controls: false,
+    controls: true,
 
     // Display a presentation progress bar
-    progress: false,
+    progress: true,
 
     // Display the page number of the current slide
-    slideNumber: false,
+    slideNumber: true,
 
     // Push each slide change to the browser history
     history: true,
